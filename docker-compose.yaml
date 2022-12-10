@@ -1,0 +1,57 @@
+version: "3"
+
+networks:
+  redis-backup:
+volumes:
+  api:
+    driver: local
+  redis:
+    driver: local
+  rediscommander:
+    driver: local
+
+services:
+  
+  redis:
+    image: redis:6.2-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+    command: redis-server --save 20 1 --loglevel warning --requirepass ${CONFIG_REDIS_PASS}
+    volumes: 
+      - redis:/data
+    networks:
+      - redis-backup
+
+  # rediscommander:
+  #   image: rediscommander/redis-commander:latest
+  #   restart: always
+  #   ports:
+  #     - '8083:8083'
+  #   environment:
+  #     - REDIS_HOSTS=local:redis:6379
+  #   volumes: 
+  #     - rediscommander:/data
+  #   networks:
+  #     - redis-backup
+  #   depends_on:
+  #     - redis
+
+  api:
+    container_name: redis-backup-api
+    image: redis-backup-api:${VERSION}
+    build: 
+      context: .
+      dockerfile:  api.Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - api
+    ports:
+      - "6561:6561"
+
+    depends_on:
+      - redis
+    networks:
+      - redis-backup
+  
