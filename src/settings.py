@@ -25,6 +25,14 @@ DEBUG = literal_eval(os.getenv("DEBUG", "true").capitalize())
 # =======================================
 # CONFIGS
 REDIS_PASS = os.getenv("CONFIG_REDIS_PASS")
+REDIS_HOST = os.getenv("CONFIG_REDIS_HOST")
+REDIS_PORT = int(os.getenv("CONFIG_REDIS_PORT"))
+
+AWS_ACCESS_KEY_ID = os.getenv("CONFIG_AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("CONFIG_AWS_SECRET_ACCESS_KEY")
+AWS_REGION_NAME= os.getenv("CONFIG_AWS_REGION_NAME")
+AWS_BUCKET_NAME= os.getenv("CONFIG_AWS_BUCKET_NAME")
+
 # =======================================
 
 
