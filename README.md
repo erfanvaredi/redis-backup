@@ -46,3 +46,19 @@ make start
 make stop
 ```
 ---
+
+# How to redis example
+1. Run Redis docker and set env vars
+2. Go to example folder
+```sh
+cd examples
+```
+3. Run redis listener:
+```sh
+python test_listener.py
+```
+4. send message to redis
+```sh
+python test_producer.py --m your_message
+```
+---
