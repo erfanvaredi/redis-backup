@@ -2,6 +2,14 @@
 
 The main purpose of this repo is to make a module that can simplify the mechanism of getting dynamic backup from redis and store them in the storage
 
+
+
+# Run by docker
+You can get the image from dockerHub as well
+```sh
+docker push erfanvaredi/redis-backup:{version}
+```
+
 # Dependencies
 1. Install [Python](https://www.python.org/downloads/)
 2. Install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [Anaconda](https://www.anaconda.com/products/individual)
