@@ -12,15 +12,14 @@ logger = getLogger(__name__)
 logger.addHandler(settings.handler)
 
 
-
 async def run(s3_client: S3Client, redis_client: redis):
 
     async with redis_client.pubsub() as pubsub:
-        str_channels = ','.join(settings.REDIS_CHANNELS)
+        str_channels = ",".join(settings.REDIS_CHANNELS)
         await pubsub.subscribe(*settings.REDIS_CHANNELS)
 
-        future = asyncio.create_task(reader(channelPubSub=pubsub,s3_client=s3_client))
-    
+        future = asyncio.create_task(reader(channelPubSub=pubsub, s3_client=s3_client))
+
         logger.info(f"listen to the channels: {str_channels}")
 
         await future
@@ -38,6 +37,11 @@ if __name__ == "__main__":
         region_name=settings.AWS_REGION_NAME,
     )
 
-    redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=0, password=settings.REDIS_PASS)
+    redis_client = redis.Redis(
+        host=settings.REDIS_HOST,
+        port=settings.REDIS_PORT,
+        db=0,
+        password=settings.REDIS_PASS,
+    )
 
-    asyncio.run(run(s3_client=s3_client,redis_client=redis_client))
+    asyncio.run(run(s3_client=s3_client, redis_client=redis_client))
