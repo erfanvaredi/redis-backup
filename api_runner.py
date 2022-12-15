@@ -9,11 +9,18 @@ import redis.asyncio as redis
 from src import settings
 
 app = FastAPI()
-redis_client = redis.Redis(host=settings.REDIS_HOST, port=settings.REDIS_PORT, db=0, password=settings.REDIS_PASS)
+redis_client = redis.Redis(
+    host=settings.REDIS_HOST,
+    port=settings.REDIS_PORT,
+    db=0,
+    password=settings.REDIS_PASS,
+)
+
 
 @app.get("/")
 def welcome():
-    return {'hello':'world'}
+    return {"hello": "world"}
+
 
 @app.get("/items/{item_id}")
 def read_item(item_id: int, q: Union[str, None] = None):
@@ -21,10 +28,9 @@ def read_item(item_id: int, q: Union[str, None] = None):
 
 
 @app.post("/send/{channel}/{key}")
-async def read_item(channel: str,key: str, q: Union[str, None] = None):
+async def read_item(channel: str, key: str, q: Union[str, None] = None):
     async with redis_client.pubsub() as pubsub:
-        
+
         await pubsub.subscribe(channel)
 
         await redis_client.publish(key)
-
