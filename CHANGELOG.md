@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog],
 and this project adheres to [Semantic Versioning].
 
 
+# 0.0.2 - DATE(15/12/2022)
+- Dockerized backup
+
+### Added
+- add redis
+- add redis commander
+- add backup module
+- dockerize
+- add tests
+- add AWS S3
+
+### Changed
+- changed local env
+
+### Removed
+- removed local tests
+
 # initVersion - DATE(10/12/2022)
 - Initial versioning
 

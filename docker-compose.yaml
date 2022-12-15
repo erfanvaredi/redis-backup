@@ -5,6 +5,8 @@ networks:
 volumes:
   api:
     driver: local
+  backup:
+    driver: local
   redis:
     driver: local
   rediscommander:
@@ -49,6 +51,24 @@ services:
       - api
     ports:
       - "6561:6561"
+
+    depends_on:
+      - redis
+    networks:
+      - redis-backup
+  
+  backup:
+    container_name: redis-backup
+    image: redis-backup:${VERSION}
+    build: 
+      context: .
+      dockerfile:  backup.Dockerfile
+    env_file:
+      - .env
+    volumes:
+      - backup
+    ports:
+      - "6969:6969"
 
     depends_on:
       - redis
