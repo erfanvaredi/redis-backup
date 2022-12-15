@@ -6,7 +6,7 @@ from datetime import datetime
 from boto3_type_annotations.s3 import Client
 from pydantic import BaseModel, StrictFloat
 
-import settings
+from src import settings
 
 logger = logging.getLogger(__name__)
 logger.addHandler(settings.handler)
