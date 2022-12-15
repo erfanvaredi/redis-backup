@@ -2,13 +2,13 @@
 FROM python:3.9.15-bullseye
 
 # 
-WORKDIR /redis-backup
+WORKDIR /api
 
 # 
-COPY requirements.txt /redis-backup/requirements.txt
+COPY requirements.txt /api/requirements.txt
 
 # 
-RUN pip install --no-cache-dir --upgrade -r /redis-backup/requirements.txt
+RUN pip install --no-cache-dir --upgrade -r /api/requirements.txt
 
 # 
 COPY . .
